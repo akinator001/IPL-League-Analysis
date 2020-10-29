@@ -3,24 +3,61 @@ package com.cp.ipl;
 import com.opencsv.bean.CsvBindByName;
 
 public class Wickets {
-	@CsvBindByName
-	public int POS;
-	@CsvBindByName
-	public String PLAYER;
-	@CsvBindByName
-	public int Math;
-	@CsvBindByName
-	public int Inns;
-	@CsvBindByName
-	public int Ov, Runs, Wkts, BBI;
-	@CsvBindByName
+	@CsvBindByName(column = "POS")
+	public int pos;
+
+	@CsvBindByName(column = "PLAYER")
+	public String Player;
+
+	@CsvBindByName(column = "Mat")
+	public int mat;
+
+	@CsvBindByName(column = "Inns")
+	public int inns;
+
+	@CsvBindByName(column = "Ov")
+	public double ov;
+
+	@CsvBindByName(column = "Runs")
+	public int runs;
+
+	@CsvBindByName(column = "Wkts")
+	public int wkts;
+
+	@CsvBindByName(column = "BBI")
+	public int bbi;
+
+	@CsvBindByName(column = "Avg")
 	public String Avg;
-	@CsvBindByName
-	public String Econ;
-	@CsvBindByName
-	public String SR;
-	@CsvBindByName
-	public int fourWickets;
-	@CsvBindByName
-	public int fiveWickets;
+	
+	@CsvBindByName(column = "Econ")
+	public double econ;
+
+	@CsvBindByName(column = "SR")
+	public String sr;
+
+	@CsvBindByName(column = "4w")
+	public int four;
+
+	@CsvBindByName(column = "5w")
+	public int five;
+
+	public double getAvg() {
+		if (Avg.equals("-"))
+			return -1;
+		else
+			return Double.parseDouble(Avg);
+	}
+
+	public void setAvg(String avg) {
+		Avg = avg;
+	}
+
+	public double getSR() {
+		if (sr.equals("-")) {
+			return 0;
+		}
+		return Double.parseDouble(sr);
+	}
+	
 }
