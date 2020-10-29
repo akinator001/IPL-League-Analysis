@@ -36,6 +36,17 @@ public class IPLAnalyser {
 			throw new CSVException("The file is not correct");
 		}
 	}
+	
+	public String BattingAverageWithStrikeRate() throws CSVException {
+		if (runsList.size() == 0) {
+			throw new CSVException("No IPL Data");
+		}
+		Comparator<Runs> censusComparator = Comparator.comparing(ipl -> ipl.getAvg());
+		this.reverseSort(runsList, censusComparator);
+		runsList.stream().sorted(Comparator.comparing(ipl -> ipl.SR));
+		String json = new Gson().toJson(runsList);
+		return json;
+	}
 
 	public String SixesAndFours() throws CSVException {
 		if (runsList.size() == 0) {
