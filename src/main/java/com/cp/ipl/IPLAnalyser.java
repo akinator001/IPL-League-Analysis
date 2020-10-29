@@ -36,7 +36,7 @@ public class IPLAnalyser {
 			throw new CSVException("The file is not correct");
 		}
 	}
-	
+
 	public String MaximumRunsWithBattingAverage() throws CSVException {
 		if (runsList.size() == 0) {
 			throw new CSVException("No IPL Data");
@@ -47,7 +47,7 @@ public class IPLAnalyser {
 		String sortedBatting = new Gson().toJson(runsList);
 		return sortedBatting;
 	}
-	
+
 	public String BattingAverageWithStrikeRate() throws CSVException {
 		if (runsList.size() == 0) {
 			throw new CSVException("No IPL Data");
@@ -88,7 +88,7 @@ public class IPLAnalyser {
 		String json = new Gson().toJson(runsList);
 		return json;
 	}
-	
+
 	public String StrikerRateWithFouresSixes() throws CSVException {
 		if (runsList.size() == 0) {
 			throw new CSVException("No IPL Data");
@@ -135,7 +135,7 @@ public class IPLAnalyser {
 		String json = new Gson().toJson(wktsList);
 		return json;
 	}
-	
+
 	public String BowlersStrikeRate() throws CSVException {
 		if (wktsList.size() == 0 || wktsList == null) {
 			throw new CSVException("No IPL Data");
@@ -145,7 +145,7 @@ public class IPLAnalyser {
 		String json = new Gson().toJson(wktsList);
 		return json;
 	}
-	
+
 	public String BestEconomySort() throws CSVException {
 		if (wktsList.size() == 0 || wktsList == null) {
 			throw new CSVException("No IPL Data");
@@ -155,4 +155,16 @@ public class IPLAnalyser {
 		String json = new Gson().toJson(wktsList);
 		return json;
 	}
+
+	public String StrikeRateAnd4w5w() throws CSVException {
+		if (wktsList.size() == 0 || wktsList == null) {
+			throw new CSVException("No IPL Data");
+		}
+		Comparator<Wickets> censusComparator = Comparator.comparing(ipl -> ipl.getFourW() + ipl.getFiveW());
+		this.reverseSort(wktsList, censusComparator);
+		wktsList.stream().sorted(Comparator.comparing(ipl -> ipl.getSR()));
+		String json = new Gson().toJson(wktsList);
+		return json;
+	}
+
 }

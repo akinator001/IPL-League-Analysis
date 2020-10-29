@@ -60,6 +60,14 @@ public class Wickets {
 		return Double.parseDouble(sr);
 	}
 	
+	public double getFourW() {
+		return four;
+	}
+
+	public double getFiveW() {
+		return five;
+	}
+
 	public double getEC() {
 		return econ;
 	}
