@@ -166,5 +166,15 @@ public class IPLAnalyser {
 		String json = new Gson().toJson(wktsList);
 		return json;
 	}
-
+	
+	public String SortStrikeRateAndAverage() throws CSVException {
+		if (wktsList.size() == 0 || wktsList == null) {
+			throw new CSVException("No IPL Data");
+		}
+		Comparator<Wickets> censusComparator = Comparator.comparing(ipl -> ipl.getAvg());
+		this.reverseSort(wktsList, censusComparator);
+		wktsList.stream().sorted(Comparator.comparing(ipl -> ipl.getSR()));
+		String json = new Gson().toJson(wktsList);
+		return json;
+	}
 }
