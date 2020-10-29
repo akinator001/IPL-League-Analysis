@@ -99,4 +99,16 @@ public class IPLAnalyserTest {
 		Assert.assertEquals("MS Dhoni", runs[0].Player);
 	}
 	
+	@Test
+	public void Maximum100_With_BestAverage() {
+		String data = null;
+		try {
+			noOfEntries = ipl.loadMostRunsCSV(RunsCSV);
+			data = ipl.maximumHundredandGreatBattingAverages();
+		} catch (CSVException e) {
+			System.out.println(e.getMessage());
+		}
+		Runs[] censusCsv = new Gson().fromJson(data, Runs[].class);
+		Assert.assertEquals("David Warner ", censusCsv[100].Player);
+	}
 }
