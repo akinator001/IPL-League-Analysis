@@ -135,4 +135,14 @@ public class IPLAnalyser {
 		String json = new Gson().toJson(wktsList);
 		return json;
 	}
+	
+	public String BowlersStrikeRate() throws CSVException {
+		if (wktsList.size() == 0 || wktsList == null) {
+			throw new CSVException("No IPL Data");
+		}
+		Comparator<Wickets> censusComparator = Comparator.comparing(ipl -> ipl.getSR());
+		this.reverseSort(wktsList, censusComparator);
+		String json = new Gson().toJson(wktsList);
+		return json;
+	}
 }
