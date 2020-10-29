@@ -63,7 +63,11 @@ public class Wickets {
 	public double getFourW() {
 		return four;
 	}
-
+	
+	public double getW() {
+		return wkts;
+	}
+	
 	public double getFiveW() {
 		return five;
 	}
