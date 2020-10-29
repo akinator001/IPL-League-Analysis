@@ -37,6 +37,17 @@ public class IPLAnalyser {
 		}
 	}
 	
+	public String MaximumRunsWithBattingAverage() throws CSVException {
+		if (runsList.size() == 0) {
+			throw new CSVException("No IPL Data");
+		}
+		Comparator<Runs> censusComparator = Comparator.comparing(ipl -> ipl.getAvg());
+		this.reverseSort(runsList, censusComparator);
+		runsList.stream().sorted(Comparator.comparing(ipl -> ipl.runs));
+		String sortedBatting = new Gson().toJson(runsList);
+		return sortedBatting;
+	}
+	
 	public String BattingAverageWithStrikeRate() throws CSVException {
 		if (runsList.size() == 0) {
 			throw new CSVException("No IPL Data");

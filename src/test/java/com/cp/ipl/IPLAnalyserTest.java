@@ -85,4 +85,18 @@ public class IPLAnalyserTest {
 		Runs[] runs = new Gson().fromJson(sortedData, Runs[].class);
 		Assert.assertEquals("MS Dhoni", runs[0].Player);
 	}
+	
+	@Test
+	public void MostRuns_And_BattingAverage() {
+
+		try {
+			noOfEntries = ipl.loadMostRunsCSV(RunsCSV);
+			sortedData = ipl.MaximumRunsWithBattingAverage();
+		} catch (CSVException e) {
+			System.out.println(e.getMessage());
+		}
+		Runs[] runs = new Gson().fromJson(sortedData, Runs[].class);
+		Assert.assertEquals("MS Dhoni", runs[0].Player);
+	}
+	
 }
