@@ -58,5 +58,18 @@ public class IPLAnaylserTestBowling {
 		Wickets[] wickets = new Gson().fromJson(sortedData, Wickets[].class);
 		Assert.assertEquals("Shivam Dube", wickets[0].Player);
 	}
+	
+	@Test
+	public void givenMostWktsCSVFile_ShouldLoad_And_SortAccordingToBestStrikeRate_And_4w_5w() {
+
+		try {
+			noOfEntries = ipl.loadMostWktsCSV(WicketsCSV);
+			sortedData = ipl.StrikeRateAnd4w5w();
+		} catch (CSVException e) {
+			System.out.println(e.getMessage());
+		}
+		Wickets[] wickets = new Gson().fromJson(sortedData, Wickets[].class);
+		Assert.assertEquals("Imran Tahir", wickets[0].Player);
+	}
 
 }
