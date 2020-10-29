@@ -41,8 +41,8 @@ public class IPLAnalyserTest {
 		} catch (CSVException e) {
 			System.out.println(e.getMessage());
 		}
-		Runs[] censusCsv = new Gson().fromJson(sortedData, Runs[].class);
-		Assert.assertEquals("Ishant Sharma", censusCsv[0].Player);
+		Runs[] runs = new Gson().fromJson(sortedData, Runs[].class);
+		Assert.assertEquals("Ishant Sharma", runs[0].Player);
 	}
 	
 	@Test
@@ -55,7 +55,21 @@ public class IPLAnalyserTest {
 		} catch (CSVException e) {
 			System.out.println(e.getMessage());
 		}
-		Runs[] censusCsv = new Gson().fromJson(sortedData, Runs[].class);
-		Assert.assertEquals("Andre Russell", censusCsv[100].Player);
+		Runs[] runs = new Gson().fromJson(sortedData, Runs[].class);
+		Assert.assertEquals("Andre Russell", runs[100].Player);
+	}
+	
+	@Test
+	public void Maximum_StrikeRate_AndFoures_Sixes() {
+
+		try {
+			noOfEntries = ipl.loadMostRunsCSV(RunsCSV);
+			sortedData = ipl.StrikerRateWithFouresSixes();
+		} catch (CSVException e) {
+			System.out.println(e.getMessage());
+		}
+
+		Runs[] runs = new Gson().fromJson(sortedData, Runs[].class);
+		Assert.assertEquals("Andre Russell", runs[0].Player);
 	}
 }
