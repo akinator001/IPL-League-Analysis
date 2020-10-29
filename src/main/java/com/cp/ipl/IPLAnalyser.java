@@ -102,6 +102,17 @@ public class IPLAnalyser {
 		return json;
 	}
 
+	public String maximumHundredandGreatBattingAverages() throws CSVException {
+		if (runsList == null || runsList.size() == 0) {
+			throw new CSVException("File error");
+		}
+		Comparator<Runs> censusComparator = Comparator.comparing(ipl -> ipl.runs);
+		this.Sort(runsList, censusComparator);
+		runsList.stream().sorted(Comparator.comparing(ipl -> ipl.hundreds));
+		String sortedBatting = new Gson().toJson(runsList);
+		return sortedBatting;
+	}
+	
 	private <E> void reverseSort(List<E> list, Comparator<E> censusComparator) {
 		for (int i = 0; i < list.size() - 1; i++) {
 			for (int j = 0; j < list.size() - 1; j++) {
