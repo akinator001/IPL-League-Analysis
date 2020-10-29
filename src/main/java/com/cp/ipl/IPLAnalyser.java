@@ -211,4 +211,23 @@ public class IPLAnalyser {
 		}
 		return bestAverageList;
 	}
+	
+	public List<String> getAllRounder() {
+		List<String> AllRounderList = new ArrayList<>();
+
+		List<Runs> bestRunsList = runsList.stream()
+				.sorted((playerA, playerB) -> Double.compare(playerA.runs, playerB.runs)).collect(Collectors.toList());
+
+		List<Wickets> bestBowlingList = wktsList.stream()
+				.sorted((playerA, playerB) -> Double.compare(playerA.wkts, playerB.wkts)).collect(Collectors.toList());
+
+		for (Runs playerBat : bestRunsList) {
+			for (Wickets playerBowler : bestBowlingList) {
+				if (playerBat.Player.equals(playerBowler.Player)) {
+					AllRounderList.add(playerBat.Player);
+				}
+			}
+		}
+		return AllRounderList;
+	}
 }
