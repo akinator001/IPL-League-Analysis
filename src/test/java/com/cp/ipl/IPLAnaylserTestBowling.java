@@ -83,4 +83,17 @@ public class IPLAnaylserTestBowling {
 		Wickets[] wickets = new Gson().fromJson(sortedData, Wickets[].class);
 		Assert.assertEquals("Krishnappa Gowtham", wickets[0].Player);
 	}
+	
+	@Test
+	public void MaximumWickets_And_BestAverage() {
+
+		try {
+			noOfEntries = ipl.loadMostWktsCSV(WicketsCSV);
+			sortedData = ipl.SortWicketsAndAverage();
+		} catch (CSVException e) {
+			System.out.println(e.getMessage());
+		}
+		Wickets[] wickets = new Gson().fromJson(sortedData, Wickets[].class);
+		Assert.assertEquals("Deepak Chahar", wickets[0].Player);
+	}
 }
