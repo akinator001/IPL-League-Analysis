@@ -3,8 +3,10 @@ package com.cp.ipl;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.cp.opencsv.CSVBuilderFactory;
 import com.cp.opencsv.CSVException;
@@ -166,7 +168,7 @@ public class IPLAnalyser {
 		String json = new Gson().toJson(wktsList);
 		return json;
 	}
-	
+
 	public String SortStrikeRateAndAverage() throws CSVException {
 		if (wktsList.size() == 0 || wktsList == null) {
 			throw new CSVException("No IPL Data");
@@ -177,7 +179,7 @@ public class IPLAnalyser {
 		String json = new Gson().toJson(wktsList);
 		return json;
 	}
-	
+
 	public String SortWicketsAndAverage() throws CSVException {
 		if (wktsList.size() == 0 || wktsList == null) {
 			throw new CSVException("No IPL Data");
@@ -186,5 +188,27 @@ public class IPLAnalyser {
 		this.reverseSort(wktsList, censusComparator);
 		String json = new Gson().toJson(wktsList);
 		return json;
+	}
+
+	public List<String> getBestBowlerAndBattingAverage() {
+
+		List<String> bestAverageList = new ArrayList<>();
+
+		List<Runs> battingAvgSorted = runsList.stream()
+				.sorted((playerA, playerB) -> Double.compare(playerA.getAvg(), playerB.getAvg()))
+				.collect(Collectors.toList());
+
+		List<Wickets> bowlingAvgSorted = wktsList.stream()
+				.sorted((playerA, playerB) -> Double.compare(playerA.getAvg(), playerB.getAvg()))
+				.collect(Collectors.toList());
+
+		for (Runs playerBat : battingAvgSorted) {
+			for (Wickets playerBowler : bowlingAvgSorted) {
+				if (playerBat.Player.equals(playerBowler.Player)) {
+					bestAverageList.add(playerBat.Player);
+				}
+			}
+		}
+		return bestAverageList;
 	}
 }

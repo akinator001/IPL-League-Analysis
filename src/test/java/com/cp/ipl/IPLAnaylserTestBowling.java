@@ -1,5 +1,7 @@
 package com.cp.ipl;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,11 +10,15 @@ import com.cp.opencsv.CSVException;
 import com.google.gson.Gson;
 
 public class IPLAnaylserTestBowling {
+
+	public final String RunsCSV = "./Runs.csv";
 	public final String WicketsCSV = "Wkts.csv";
 	
 	IPLAnalyser ipl = null;
 	int noOfEntries = 0;
 	String sortedData = null;
+	int noOfEntriesruns = 0;
+	int noOfEntrieswickets = 0;
 
 	@Before
 	public void setUp() {
@@ -95,5 +101,21 @@ public class IPLAnaylserTestBowling {
 		}
 		Wickets[] wickets = new Gson().fromJson(sortedData, Wickets[].class);
 		Assert.assertEquals("Deepak Chahar", wickets[0].Player);
+	}
+	
+	@Test
+	public void BestBattingAvgerage_And_BowlingAvgerage() {
+		List<String> sortedData = null;
+		try {
+			noOfEntriesruns = ipl.loadMostRunsCSV(RunsCSV);
+			noOfEntrieswickets = ipl.loadMostWktsCSV(WicketsCSV);
+			sortedData = ipl.getBestBowlerAndBattingAverage();
+		} catch (CSVException e) {
+			System.out.println(e.getMessage());
+		}
+//		System.out.println(noOfEntrieswickets+"  "+noOfEntriesruns);
+		Assert.assertEquals("Andre Russell", sortedData.get(48));
+		Assert.assertEquals("Marcus Stoinis", sortedData.get(47));
+
 	}
 }
