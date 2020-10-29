@@ -112,7 +112,17 @@ public class IPLAnalyser {
 		String sortedBatting = new Gson().toJson(runsList);
 		return sortedBatting;
 	}
-	
+
+	public List<Runs> getPlayerWithZeroHundredsOrZeroFiftiesButBestBattingAverage() throws CSVException {
+		if (runsList == null || runsList.size() == 0) {
+			throw new CSVException("File error");
+		}
+		List<Runs> list = runsList.stream().filter(player -> player.hundreds == 0 && player.fiftys == 0)
+				.sorted((player1, player2) -> Double.compare(player1.getAvg(), player2.getAvg()))
+				.collect(Collectors.toList());
+		return list;
+	}
+
 	private <E> void reverseSort(List<E> list, Comparator<E> censusComparator) {
 		for (int i = 0; i < list.size() - 1; i++) {
 			for (int j = 0; j < list.size() - 1; j++) {
@@ -222,7 +232,7 @@ public class IPLAnalyser {
 		}
 		return bestAverageList;
 	}
-	
+
 	public List<String> getAllRounder() {
 		List<String> AllRounderList = new ArrayList<>();
 
