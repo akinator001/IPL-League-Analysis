@@ -72,4 +72,17 @@ public class IPLAnalyserTest {
 		Runs[] runs = new Gson().fromJson(sortedData, Runs[].class);
 		Assert.assertEquals("Andre Russell", runs[0].Player);
 	}
+	
+	@Test
+	public void Maximum_BattingAverage_StrikeRate() {
+		String sortedData = null;
+		try {
+			noOfEntries = ipl.loadMostRunsCSV(RunsCSV);
+			sortedData = ipl.BattingAverageWithStrikeRate();
+		} catch (CSVException e) {
+			System.out.println(e.getMessage());
+		}
+		Runs[] runs = new Gson().fromJson(sortedData, Runs[].class);
+		Assert.assertEquals("MS Dhoni", runs[0].Player);
+	}
 }
