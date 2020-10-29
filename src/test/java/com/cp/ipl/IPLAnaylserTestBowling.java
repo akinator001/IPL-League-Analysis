@@ -71,5 +71,16 @@ public class IPLAnaylserTestBowling {
 		Wickets[] wickets = new Gson().fromJson(sortedData, Wickets[].class);
 		Assert.assertEquals("Imran Tahir", wickets[0].Player);
 	}
+	@Test
+	public void Best_StrikeRate_And_Great_Average() {
 
+		try {
+			noOfEntries = ipl.loadMostWktsCSV(WicketsCSV);
+			sortedData = ipl.SortStrikeRateAndAverage();
+		} catch (CSVException e) {
+			System.out.println(e.getMessage());
+		}
+		Wickets[] wickets = new Gson().fromJson(sortedData, Wickets[].class);
+		Assert.assertEquals("Krishnappa Gowtham", wickets[0].Player);
+	}
 }
